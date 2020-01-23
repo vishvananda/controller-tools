@@ -29,6 +29,9 @@ var KnownPackages = map[string]PackageOverride{
 		p.Schemata[TypeIdent{Name: "URL", Package: pkg}] = apiext.JSONSchemaProps{
 			Type: "string",
 		}
+		p.Schemata[TypeIdent{Name: "VolatileTime", Package: pkg}] = apiext.JSONSchemaProps{
+			Type: "string",
+		}
 		p.AddPackage(pkg) // get the rest of the types
 	},
 
