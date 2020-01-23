@@ -25,6 +25,13 @@ import (
 // but don't have validation markers on them (since they're from core Kubernetes).
 var KnownPackages = map[string]PackageOverride{
 
+	"knative.dev/pkg/apis": func(p *Parser, pkg *loader.Package) {
+		p.Schemata[TypeIdent{Name: "URL", Package: pkg}] = apiext.JSONSchemaProps{
+			Type: "string",
+		}
+		p.AddPackage(pkg) // get the rest of the types
+	},
+
 	"k8s.io/apimachinery/pkg/apis/meta/v1": func(p *Parser, pkg *loader.Package) {
 		// ObjectMeta is managed by the Kubernetes API server, so no need to
 		// generate validation for it.
